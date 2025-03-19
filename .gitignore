@@ -1,0 +1,7 @@
+.env
+__pycache__/
+.git
+.ipynb_checkpoints/
+*.ipynb
+.DS_Store
+data/
