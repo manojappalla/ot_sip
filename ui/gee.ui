@@ -65,7 +65,7 @@
     <property name="title">
      <string>Download</string>
     </property>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="landsatRBtn">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -78,7 +78,7 @@
       <string>Landsat</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="sent2RBtn">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -91,6 +91,142 @@
       <string>Sentinel-2</string>
      </property>
     </widget>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>561</width>
+       <height>501</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="landsatPage">
+      <widget class="QLabel" name="goeJsonLbl">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>100</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Input GeoJSON:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="geoJsonPath">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>100</y>
+         <width>341</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="geoJsonPathBtn">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>100</y>
+         <width>51</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="startDateLbl">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>160</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start Date:</string>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="startDateSelector">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>160</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="endDateLbl">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>210</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>End Date:</string>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="endDateSelector">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>210</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="cloudCoverLbl">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>270</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cloud Cover:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="cloudCoverTxt">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>270</y>
+         <width>51</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>0-100</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="downloadBtn">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>400</y>
+         <width>113</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Download</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -101,5 +237,70 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>landsatRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cloudCoverLbl</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>560</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>landsatRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cloudCoverTxt</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>635</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sent2RBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cloudCoverLbl</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>649</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>560</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sent2RBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>cloudCoverTxt</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>649</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>635</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

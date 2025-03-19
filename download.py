@@ -5,6 +5,7 @@ import io
 import subprocess
 import platform
 from PyQt5.QtCore import QThread, pyqtSignal
+from gee_downloader.main import main
 
 
 # Worker thread for Earth Engine authentication
@@ -87,6 +88,41 @@ class DownloadWindow(QtWidgets.QMainWindow):
     def setupSignals(self):
         """Connect UI elements to their functions."""
         self.authenticateBtn.clicked.connect(self.authenticateGEE)
+        self.geoJsonPathBtn.clicked.connect(self.selectGeoJson)
+        self.downloadBtn.clicked.connect(self.downloadData)
+
+    def downloadData(self):
+        """Initiate the download process based on the selected satellite."""
+        if self.landsatRBtn.isChecked():
+            main(
+                dataset="landsat",
+                geojson=self.geoJsonPath.text(),
+                start_date=self.startDateSelector.date().toString("yyyy-MM-dd"),
+                end_date=self.endDateSelector.date().toString("yyyy-MM-dd"),
+            )
+        elif self.sent2RBtn.isChecked():
+            main(
+                dataset='sentinel',
+                geojson=self.geoJsonPath.text(),
+                start_date=self.startDateSelector.date().toString("yyyy-MM-dd"),
+                end_date=self.endDateSelector.date().toString("yyyy-MM-dd"),
+                cloud_cover=int(self.cloudCoverTxt.text())
+            )
+
+    def selectGeoJson(self):
+        """Open a file dialog to select a GeoJSON file."""
+        options = QtWidgets.QFileDialog.Options()
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "Select GeoJSON File",
+            "",
+            "GeoJSON Files (*.geojson)",
+            options=options,
+        )
+        if fileName:
+            self.geoJsonPath.setText(
+                fileName
+            )  # Update the text box with the selected file path
 
     def authenticateGEE(self):
         """Authenticate with Google Earth Engine and update the output text box."""
