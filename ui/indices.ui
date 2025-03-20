@@ -1,0 +1,1832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>879</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QTabWidget" name="indicesTab">
+   <property name="geometry">
+    <rect>
+     <x>29</x>
+     <y>39</y>
+     <width>821</width>
+     <height>671</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="vegTab">
+    <attribute name="title">
+     <string>Vegetation Indices</string>
+    </attribute>
+    <widget class="QRadioButton" name="ndviRBtn">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>70</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NDVI</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="msaviRBtn">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>70</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>MSAVI</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="variRBtn">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>70</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>VARI</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="greenBandLblVI">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>220</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Green Band:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="blueBandLblVI">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>160</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Blue Band:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="blueBandPathVI">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>160</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="greenBandPathVI">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>220</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="redBandLblVI">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>280</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Red Band:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="redBandPathVI">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>280</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nirBandPathVI">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>340</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nirBandLblVI">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>340</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NIR Band:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="blueBandPathBtnVI">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>160</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="greenBandPathBtnVI">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>220</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="redBandPathBtnVI">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>280</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="nirBandPathBtnVI">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>340</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="generateBtnVI">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>440</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="waterTab">
+    <attribute name="title">
+     <string>Water Indices</string>
+    </attribute>
+    <widget class="QLabel" name="greenBandLblWI">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>170</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Green Band:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="generateBtnWI">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>450</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="swir2BandPathWI">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>350</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="greenBandPathBtnWI">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>170</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nirBandLblWI">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>230</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NIR Band:</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="mndwiRBtn">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>80</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>MNDWI</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="ndmiRBtn">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>80</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NDMI</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="swir1BandPathBtnWI">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>290</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="swir1BandLblWI">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>290</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SWIR-1 Band:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="swir2BandPathBtnWI">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>350</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="greenBandPathWI">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>170</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="nirBandPathBtnWI">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>230</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="swir1BandPathWI">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>290</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nirBandPathWI">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>230</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="swir2BandLblWI">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>350</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SWIR-2 Band:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="geologyTab">
+    <attribute name="title">
+     <string>Geology Indices</string>
+    </attribute>
+    <widget class="QLineEdit" name="nirBandPathGI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>320</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="swir1BandPathGI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>380</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="ferrousRBtn">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>90</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ferrous</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="swir1BandLblGI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>380</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SWIR-1 Band:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="swir2BandPathBtnGI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>440</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="swir1BandPathBtnGI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>380</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nirBandLblGI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>320</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NIR Band:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="swir2BandPathGI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>440</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="generateBtnGI">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>540</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="clayRBtn">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>90</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clay</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="swir2BandLblGI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>440</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SWIR-2 Band:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="nirBandPathBtnGI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>320</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="redBandPathGI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>260</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="redBandPathBtnGI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>260</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="redBandLblGI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>260</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Red Band:</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="ioRBtn">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>90</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Iron Oxide</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="blueBandLblGI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>200</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Blue Band:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="blueBandPathBtnGI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>200</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="blueBandPathGI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>200</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="landTab">
+    <attribute name="title">
+     <string>Land Indices</string>
+    </attribute>
+    <widget class="QLabel" name="nirBandLblLI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>220</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NIR Band:</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="nbrRBtn">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>90</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NBR</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="redBandLblLI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>160</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Red Band:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="nirBandPathLI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>220</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="baiRBtn">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>90</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>BAI</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="redBandPathBtnLI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>160</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="swir1BandPathLI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>280</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="nirBandPathBtnLI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>220</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="ndbiRBtn">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>90</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NDBI</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="swir1BandPathBtnLI">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>280</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="swir1BandLblLI">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>280</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SWIR-1 Band:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="redBandPathLI">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>160</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="generateBtnLI">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>380</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>ndviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandLblVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>151</x>
+     <y>144</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>160</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>200</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathBtnVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>182</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>603</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandLblVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>141</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandPathVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandPathBtnVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>611</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>msaviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandLblVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>259</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>239</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>msaviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>250</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>msaviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathBtnVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>608</x>
+     <y>233</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>msaviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandLblVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>229</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>msaviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandPathVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>218</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>263</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>msaviRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandPathBtnVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>616</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>variRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandLblVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>382</x>
+     <y>145</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>167</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>variRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>417</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>425</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>variRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathBtnVI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>149</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>594</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mndwiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandLblWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>164</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mndwiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>175</x>
+     <y>156</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>242</x>
+     <y>303</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mndwiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathBtnWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>195</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>625</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mndwiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandLblWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mndwiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>178</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>336</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mndwiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathBtnWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>631</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndmiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandLblWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>198</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndmiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandPathWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>300</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>308</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndmiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>greenBandPathBtnWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>290</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>609</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndmiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandLblWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>198</x>
+     <y>424</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndmiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>161</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>428</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndmiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathBtnWI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>266</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>184</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>203</x>
+     <y>166</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>252</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>218</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>655</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>166</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>176</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>151</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>290</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>640</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>164</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>176</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>174</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clayRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>629</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>268</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>240</x>
+     <y>291</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>blueBandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>253</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>635</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>182</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>269</x>
+     <y>173</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>267</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>634</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>295</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>183</x>
+     <y>517</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>514</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ferrousRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>173</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>641</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>384</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>394</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>290</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>nirBandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>344</x>
+     <y>167</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>633</x>
+     <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir1BandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>454</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir1BandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>447</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir1BandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>637</x>
+     <y>454</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandLblGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>397</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>414</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>363</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ioRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir2BandPathBtnGI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>417</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>647</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>baiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir1BandLblLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>183</x>
+     <y>168</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>baiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir1BandPathLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>baiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>swir1BandPathBtnLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>170</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>631</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nbrRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandLblLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>275</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>182</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nbrRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>317</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nbrRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathBtnLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>635</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndbiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandLblLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>360</x>
+     <y>168</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndbiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>382</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>388</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ndbiRBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>redBandPathBtnLI</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>411</x>
+     <y>166</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>652</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
