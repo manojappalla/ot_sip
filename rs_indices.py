@@ -69,6 +69,50 @@ class IndicesWindow(QtWidgets.QDialog):
         self.generateBtnGI.clicked.connect(self.generateIndices)
         self.generateBtnLI.clicked.connect(self.generateIndices)
 
+        self.ndviRBtn.toggled.connect(self.resetVegetationProgress)
+        self.msaviRBtn.toggled.connect(self.resetVegetationProgress)
+        self.variRBtn.toggled.connect(self.resetVegetationProgress)
+        self.mndwiRBtn.toggled.connect(self.resetWaterProgress)
+        self.ndmiRBtn.toggled.connect(self.resetWaterProgress)
+        self.clayRBtn.toggled.connect(self.resetGeologyProgress)
+        self.ferrousRBtn.toggled.connect(self.resetGeologyProgress)
+        self.ioRBtn.toggled.connect(self.resetGeologyProgress)
+        self.baiRBtn.toggled.connect(self.resetLandProgress)
+        self.nbrRBtn.toggled.connect(self.resetLandProgress)
+        self.ndbiRBtn.toggled.connect(self.resetLandProgress)
+
+        self.indicesTab.currentChanged.connect(self.resetOtherTabRadios)
+
+    def resetOtherTabRadios(self, current_index):
+        # Get the current tab widget
+        current_tab = self.indicesTab.widget(current_index)
+
+        # Loop over all tabs
+        for i in range(self.indicesTab.count()):
+            tab = self.indicesTab.widget(i)
+            if tab != current_tab:
+                # Uncheck all QRadioButtons in tabs that are not active
+                for radio in tab.findChildren(QtWidgets.QRadioButton):
+                    radio.setAutoExclusive(False)
+                    radio.setChecked(False)
+                    radio.setAutoExclusive(True)
+
+    def resetVegetationProgress(self):
+        """Reset the progress bar for vegetation indices."""
+        self.progressBarVI.setValue(0)
+
+    def resetWaterProgress(self):
+        """Reset the progress bar for water indices."""
+        self.progressBarWI.setValue(0)
+
+    def resetGeologyProgress(self):
+        """Reset the progress bar for geology indices."""
+        self.progressBarGI.setValue(0)
+
+    def resetLandProgress(self):
+        """Reset the progress bar for land indices."""
+        self.progressBarLI.setValue(0)
+
     def selectBand(self):
         """Handles file selection and sets path to the correct QLineEdit"""
         button = self.sender()  # The button that triggered the signal
@@ -112,6 +156,10 @@ class IndicesWindow(QtWidgets.QDialog):
             vegetation_indices.ndvi()
             self.ndviRBtn.setAutoExclusive(False)
             self.ndviRBtn.setChecked(False)
+            self.ndviRBtn.setAutoExclusive(True)
+            self.redBandPathVI.setText("")
+            self.nirBandPathVI.setText("")
+            self.progressBarVI.setValue(100)
 
         elif self.msaviRBtn.isChecked():
             red_band_path = self.redBandPathVI.text()
@@ -121,6 +169,10 @@ class IndicesWindow(QtWidgets.QDialog):
             vegetation_indices.msavi()
             self.msaviRBtn.setAutoExclusive(False)
             self.msaviRBtn.setChecked(False)
+            self.msaviRBtn.setAutoExclusive(True)
+            self.redBandPathVI.setText("")
+            self.redBandPathVI.setText("")
+            self.progressBarVI.setValue(100)
 
         elif self.variRBtn.isChecked():
             blue_band_path = self.blueBandPathVI.text()
@@ -135,6 +187,11 @@ class IndicesWindow(QtWidgets.QDialog):
             vegetation_indices.vari()
             self.variRBtn.setAutoExclusive(False)
             self.variRBtn.setChecked(False)
+            self.variRBtn.setAutoExclusive(True)
+            self.blueBandPathVI.setText("")
+            self.greenBandPathVI.setText("")
+            self.redBandPathVI.setText("")
+            self.progressBarVI.setValue(100)
 
         elif self.mndwiRBtn.isChecked():
             green_band_path = self.greenBandPathWI.text()
@@ -144,6 +201,10 @@ class IndicesWindow(QtWidgets.QDialog):
             water_indices.mndwi()
             self.mndwiRBtn.setAutoExclusive(False)
             self.mndwiRBtn.setChecked(False)
+            self.mndwiRBtn.setAutoExclusive(True)
+            self.greenBandPathWI.setText("")
+            self.swir1BandPathWI.setText("")
+            self.progressBarWI.setValue(100)
 
         elif self.ndmiRBtn.isChecked():
             nir_band_path = self.nirBandPathWI.text()
@@ -153,6 +214,10 @@ class IndicesWindow(QtWidgets.QDialog):
             water_indices.ndmi()
             self.ndmiRBtn.setAutoExclusive(False)
             self.ndmiRBtn.setChecked(False)
+            self.ndmiRBtn.setAutoExclusive(True)
+            self.nirBandPathWI.setText("")
+            self.swir1BandPathWI.setText("")
+            self.progressBarWI.setValue(100)
 
         elif self.clayRBtn.isChecked():
             swir1_band_path = self.swir1BandPathGI.text()
@@ -162,6 +227,10 @@ class IndicesWindow(QtWidgets.QDialog):
             geology_indices.clay()
             self.clayRBtn.setAutoExclusive(False)
             self.clayRBtn.setChecked(False)
+            self.clayRBtn.setAutoExclusive(True)
+            self.swir1BandPathGI.setText("")
+            self.swir2BandPathGI.setText("")
+            self.progressBarGI.setValue(100)
 
         elif self.ferrousRBtn.isChecked():
             nir_band_path = self.nirBandPathGI.text()
@@ -171,6 +240,10 @@ class IndicesWindow(QtWidgets.QDialog):
             geology_indices.ferrous()
             self.ferrousRBtn.setAutoExclusive(False)
             self.ferrousRBtn.setChecked(False)
+            self.ferrousRBtn.setAutoExclusive(True)
+            self.nirBandPathGI.setText("")
+            self.swir1BandPathGI.setText("")
+            self.progressBarGI.setValue(100)
 
         elif self.ioRBtn.isChecked():
             blue_band_path = self.blueBandPathGI.text()
@@ -180,6 +253,10 @@ class IndicesWindow(QtWidgets.QDialog):
             geology_indices.iron_oxide()
             self.ioRBtn.setAutoExclusive(False)
             self.ioRBtn.setChecked(False)
+            self.ioRBtn.setAutoExclusive(True)
+            self.blueBandPathGI.setText("")
+            self.redBandPathGI.setText("")
+            self.progressBarGI.setValue(100)
 
         elif self.baiRBtn.isChecked():
             red_band_path = self.redBandPathLI.text()
@@ -187,8 +264,12 @@ class IndicesWindow(QtWidgets.QDialog):
             band_paths = {"red": red_band_path, "nir": nir_band_path}
             land_indices = LandIndices(band_paths, self.outputPathLI.text())
             land_indices.bai()
-            self.baiRBtn.setAutoExclusive(False) 
+            self.baiRBtn.setAutoExclusive(False)
             self.baiRBtn.setChecked(False)
+            self.baiRBtn.setAutoExclusive(True)
+            self.redBandPathLI.setText("")
+            self.nirBandPathLI.setText("")
+            self.progressBarLI.setValue(100)
 
         elif self.nbrRBtn.isChecked():
             nir_band_path = self.nirBandPathLI.text()
@@ -196,8 +277,12 @@ class IndicesWindow(QtWidgets.QDialog):
             band_paths = {"nir": nir_band_path, "swir1": swir1_band_path}
             land_indices = LandIndices(band_paths, self.outputPathLI.text())
             land_indices.nbr()
-            self.nbrRBtn.setAutoExclusive(False) 
+            self.nbrRBtn.setAutoExclusive(False)
             self.nbrRBtn.setChecked(False)
+            self.nbrRBtn.setAutoExclusive(True)
+            self.nirBandPathLI.setText("")
+            self.swir1BandPathLI.setText("")
+            self.progressBarLI.setValue(100)
 
         elif self.ndbiRBtn.isChecked():
             nir_band_path = self.nirBandPathLI.text()
@@ -205,5 +290,9 @@ class IndicesWindow(QtWidgets.QDialog):
             band_paths = {"nir": nir_band_path, "swir1": swir1_band_path}
             land_indices = LandIndices(band_paths, self.outputPathLI.text())
             land_indices.ndbi()
-            self.ndbiRBtn.setAutoExclusive(False) 
+            self.ndbiRBtn.setAutoExclusive(False)
             self.ndbiRBtn.setChecked(False)
+            self.ndbiRBtn.setAutoExclusive(True)
+            self.nirBandPathLI.setText("")
+            self.swir1BandPathLI.setText("")
+            self.progressBarLI.setValue(100)
