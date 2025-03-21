@@ -1,6 +1,7 @@
 import sys
 import rasterio
 import numpy as np
+from pyproj import Transformer
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -13,12 +14,25 @@ from PyQt5.QtWidgets import (
     QDialog,
     QVBoxLayout,
     QTextEdit,
+    QGraphicsView,
+    QLineEdit,
 )
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
-from download import DownloadWindow
-from rs_indices import IndicesWindow
+
+
+class HoverGraphicsView(QGraphicsView):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setMouseTracking(True)
+        self.main_window = parent
+
+    def mouseMoveEvent(self, event):
+        pos = self.mapToScene(event.pos())
+        x, y = pos.x(), pos.y()
+        if self.main_window:
+            self.main_window.update_mouse_position(x, y)
 
 
 class MainWindow(QMainWindow):
@@ -27,25 +41,28 @@ class MainWindow(QMainWindow):
         uic.loadUi("ui/sat_img_process.ui", self)
 
         self.scene = QGraphicsScene()
-        self.graphicsView.setScene(self.scene)
         self.layer_items = {}
+        self.raster_crs = None
+        self.raster_transform = None
+        self.transformer = None
+
+        self.setupGraphicsView()
         self.setupSignals()
         self.setupLayerTreeContextMenu()
+
+    def setupGraphicsView(self):
+        orig_view = self.graphicsView
+        self.graphicsView = HoverGraphicsView(self)
+        self.graphicsView.setObjectName("graphicsView")
+        self.graphicsView.setScene(self.scene)
+
+        layout = orig_view.parent().layout()
+        layout.replaceWidget(orig_view, self.graphicsView)
+        orig_view.deleteLater()
 
     def setupSignals(self):
         self.actionOpen.triggered.connect(self.open_raster)
         self.layerTree.itemChanged.connect(self.handle_layer_visibility)
-        self.actionDownload.triggered.connect(self.openDownloadWindow)
-        self.actionIndices.triggered.connect(self.openIndicesWindow)
-
-    def openDownloadWindow(self):
-        self.downloadWindow = DownloadWindow()
-        self.downloadWindow.show()
-
-    def openIndicesWindow(self):
-        """Opens the indices window."""
-        self.indicesWindow = IndicesWindow()
-        self.indicesWindow.show()
 
     def setupLayerTreeContextMenu(self):
         self.layerTree.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -58,11 +75,29 @@ class MainWindow(QMainWindow):
         if not file_path or file_path in self.layer_items:
             return
 
-        qimage = self.raster_to_qimage(file_path)
-        if qimage is None:
-            return
+        with rasterio.open(file_path) as src:
+            self.raster_crs = src.crs
+            self.raster_transform = src.transform
+            self.transformer = Transformer.from_crs(
+                self.raster_crs, "EPSG:4326", always_xy=True
+            )
+            count = src.count
+            if count >= 3:
+                r = src.read(1)
+                g = src.read(2)
+                b = src.read(3)
+                rgb = np.stack((r, g, b), axis=-1)
+                img = self._normalize(rgb)
+            elif count == 1:
+                band = src.read(1)
+                norm = self._normalize(band)
+                img = np.stack((norm, norm, norm), axis=-1)
+            else:
+                return
 
-        pixmap = QPixmap.fromImage(qimage)
+        h, w, _ = img.shape
+        qimg = QImage(img.data, w, h, 3 * w, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(qimg)
         item = QGraphicsPixmapItem(pixmap)
         self.scene.addItem(item)
         self.layer_items[file_path] = item
@@ -71,30 +106,8 @@ class MainWindow(QMainWindow):
         tree_item = self._make_tree_item(layer_name)
         self.layerTree.insertTopLevelItem(0, tree_item)
         self.update_z_values()
-
-    def raster_to_qimage(self, path):
-        try:
-            with rasterio.open(path) as src:
-                count = src.count
-                if count >= 3:
-                    r = src.read(1)
-                    g = src.read(2)
-                    b = src.read(3)
-                    rgb = np.stack((r, g, b), axis=-1)
-                    img = self._normalize(rgb)
-                elif count == 1:
-                    band = src.read(1)
-                    norm = self._normalize(band)
-                    img = np.stack((norm, norm, norm), axis=-1)
-                else:
-                    return None
-
-                h, w, _ = img.shape
-                qimg = QImage(img.data, w, h, 3 * w, QImage.Format_RGB888)
-                return qimg
-        except Exception as e:
-            print("Error loading raster:", e)
-            return None
+        epsg_code = self.raster_crs.to_epsg()
+        self.crsTxt.setText(f"EPSG:{epsg_code}")
 
     def _normalize(self, arr):
         arr = arr.astype(float)
@@ -205,6 +218,16 @@ class MainWindow(QMainWindow):
         dialog.setLayout(layout)
         dialog.resize(500, 400)
         dialog.exec_()
+
+    def update_mouse_position(self, x, y):
+        if self.raster_transform and self.transformer:
+            try:
+                col, row = int(x), int(y)
+                map_x, map_y = self.raster_transform * (col, row)
+                lon, lat = self.transformer.transform(map_x, map_y)
+                self.coordinatesTxt.setText(f"Lat: {lat:.3f}, Lon: {lon:.3f}")
+            except Exception:
+                self.coordinatesTxt.setText("Invalid")
 
 
 if __name__ == "__main__":
