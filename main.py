@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, uic
 import sys
 from download import DownloadWindow
+from rs_indices import IndicesWindow
 
 
 class MainApp(QtWidgets.QMainWindow):
@@ -12,11 +13,17 @@ class MainApp(QtWidgets.QMainWindow):
 
         # Connect the Download button to open `DownloadWindow`
         self.downloadBtnMainWindow.clicked.connect(self.openDownloadWindow)
+        self.indicesBtnMainWindow.clicked.connect(self.openIndicesWindow)
 
     def openDownloadWindow(self):
         """Opens the download window."""
         self.downloadWindow = DownloadWindow()
         self.downloadWindow.show()
+    
+    def openIndicesWindow(self):
+        """Opens the indices window."""
+        self.indicesWindow = IndicesWindow()
+        self.indicesWindow.show()
 
 
 if __name__ == "__main__":
