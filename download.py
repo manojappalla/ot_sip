@@ -102,11 +102,11 @@ class DownloadWindow(QtWidgets.QMainWindow):
             )
         elif self.sent2RBtn.isChecked():
             main(
-                dataset='sentinel',
+                dataset="sentinel",
                 geojson=self.geoJsonPath.text(),
                 start_date=self.startDateSelector.date().toString("yyyy-MM-dd"),
                 end_date=self.endDateSelector.date().toString("yyyy-MM-dd"),
-                cloud_cover=int(self.cloudCoverTxt.text())
+                cloud_cover=int(self.cloudCoverTxt.text()),
             )
 
     def selectGeoJson(self):
