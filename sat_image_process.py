@@ -20,6 +20,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
+from symbology.symbology_dialog_discrete import SymbologyDialogDiscrete
+from symbology.symbology_dialog_continuous import SymbologyDialogContinuous
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -132,9 +134,12 @@ class MainWindow(QMainWindow):
         zoom_action = QAction("Zoom to Layer", self)
         remove_action = QAction("Remove Layer", self)
         info_action = QAction("Information", self)
+        symbology_action = QAction("Symbology", self)
+
         menu.addAction(zoom_action)
         menu.addAction(remove_action)
         menu.addAction(info_action)
+        menu.addAction(symbology_action)
 
         action = menu.exec_(self.layerTree.viewport().mapToGlobal(pos))
 
@@ -144,6 +149,57 @@ class MainWindow(QMainWindow):
             self.zoom_to_layer(layer_name)
         elif action == info_action:
             self.show_layer_info(layer_name)
+        elif action == symbology_action:
+            self.open_symbology(layer_name)
+
+    def open_symbology(self, layer_name):
+        for path, item in self.layer_items.items():
+            if path.endswith(layer_name):
+                with rasterio.open(path) as src:
+                    band = src.read(1)
+                    unique_vals = np.unique(band)
+
+                    is_discrete = (
+                        band.dtype in [np.uint8, np.int16, np.int32]
+                        and len(unique_vals) <= 20
+                    )
+
+                    if is_discrete:
+                        # Discrete symbology
+                        dialog = SymbologyDialogDiscrete(list(unique_vals))
+                        if dialog.exec_():
+                            color_map = dialog.get_color_map()
+                            colored = np.zeros((*band.shape, 3), dtype=np.uint8)
+                            for val, color in color_map.items():
+                                mask = band == val
+                                colored[mask] = [
+                                    color.red(),
+                                    color.green(),
+                                    color.blue(),
+                                ]
+                    else:
+                        # Continuous symbology
+                        min_val, max_val = np.nanmin(band), np.nanmax(band)
+                        dialog = SymbologyDialogContinuous(
+                            min_val, max_val, num_classes=4
+                        )
+                        if dialog.exec_():
+                            ranges, colors = dialog.get_ranges_and_colors()
+                            colored = np.zeros((*band.shape, 3), dtype=np.uint8)
+                            for (low, high), color in zip(ranges, colors):
+                                mask = (band >= low) & (band <= high)
+                                colored[mask] = [
+                                    color.red(),
+                                    color.green(),
+                                    color.blue(),
+                                ]
+
+                    # Apply new image
+                    h, w, _ = colored.shape
+                    qimg = QImage(colored.data, w, h, 3 * w, QImage.Format_RGB888)
+                    pixmap = QPixmap.fromImage(qimg)
+                    self.layer_items[path].setPixmap(pixmap)
+                break
 
     def remove_layer(self, layer_name):
         path_to_remove = None
