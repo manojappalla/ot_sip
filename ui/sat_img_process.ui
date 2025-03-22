@@ -25,7 +25,13 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QTreeWidget" name="layerTree"/>
+      <widget class="QTreeWidget" name="layerTree">
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -116,8 +122,16 @@
     <property name="title">
      <string>Raster</string>
     </property>
+    <widget class="QMenu" name="menuClassification">
+     <property name="title">
+      <string>Classification</string>
+     </property>
+     <addaction name="actionSupervised"/>
+     <addaction name="actionUnsupervised"/>
+    </widget>
     <addaction name="actionDownload"/>
     <addaction name="actionIndices"/>
+    <addaction name="menuClassification"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuRaster"/>
@@ -140,6 +154,16 @@
   <action name="actionIndices">
    <property name="text">
     <string>Indices</string>
+   </property>
+  </action>
+  <action name="actionSupervised">
+   <property name="text">
+    <string>Supervised</string>
+   </property>
+  </action>
+  <action name="actionUnsupervised">
+   <property name="text">
+    <string>Unsupervised</string>
    </property>
   </action>
  </widget>
