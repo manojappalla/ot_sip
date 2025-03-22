@@ -22,6 +22,8 @@ from PyQt5.QtCore import Qt
 from PyQt5 import uic
 from symbology.symbology_dialog_discrete import SymbologyDialogDiscrete
 from symbology.symbology_dialog_continuous import SymbologyDialogContinuous
+from rs_indices import IndicesWindow
+from download import DownloadWindow
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -65,6 +67,18 @@ class MainWindow(QMainWindow):
     def setupSignals(self):
         self.actionOpen.triggered.connect(self.open_raster)
         self.layerTree.itemChanged.connect(self.handle_layer_visibility)
+        self.actionDownload.triggered.connect(self.openDownload)
+        self.actionIndices.triggered.connect(self.openIndices)
+
+    def openDownload(self):
+        # Create an instance of the DownloadWindow and show it
+        self.download_window = DownloadWindow()
+        self.download_window.show()
+
+    def openIndices(self):
+        # Create an instance of the IndicesWindow and show it
+        self.indices_window = IndicesWindow()
+        self.indices_window.exec_()  # Using exec_() for modal dialog
 
     def setupLayerTreeContextMenu(self):
         self.layerTree.setContextMenuPolicy(Qt.CustomContextMenu)
