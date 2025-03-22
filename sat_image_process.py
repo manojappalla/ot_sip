@@ -24,6 +24,7 @@ from symbology.symbology_dialog_discrete import SymbologyDialogDiscrete
 from symbology.symbology_dialog_continuous import SymbologyDialogContinuous
 from rs_indices import IndicesWindow
 from download import DownloadWindow
+from supervised import SupervisedDialog
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -69,6 +70,12 @@ class MainWindow(QMainWindow):
         self.layerTree.itemChanged.connect(self.handle_layer_visibility)
         self.actionDownload.triggered.connect(self.openDownload)
         self.actionIndices.triggered.connect(self.openIndices)
+        self.actionSupervised.triggered.connect(self.openSupervised)
+
+    def openSupervised(self):
+        # Create an instance of the SymbologyDialogDiscrete and show it
+        self.supervised_dialog = SupervisedDialog()
+        self.supervised_dialog.exec_()  # Using exec_() for modal dialog
 
     def openDownload(self):
         # Create an instance of the DownloadWindow and show it

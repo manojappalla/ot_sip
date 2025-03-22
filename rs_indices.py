@@ -16,9 +16,6 @@ class IndicesWindow(QtWidgets.QDialog):
         # Set up signals
         self.setupSignals()
 
-        # Initialize authentication thread
-        self.auth_thread = None
-
     def setupSignals(self):
         """Connect UI elements to their functions."""
         self.band_button_map = {

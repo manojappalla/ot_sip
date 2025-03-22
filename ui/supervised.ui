@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>supervisedDialog</class>
+ <widget class="QDialog" name="supervisedDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1103</width>
+    <height>856</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Supervised Classification</string>
+  </property>
+  <widget class="QGroupBox" name="algoGrpBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>450</y>
+     <width>521</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Choose Algorithm</string>
+   </property>
+   <widget class="QStackedWidget" name="algoStk">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>501</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="defaultEmptyPage"/>
+    <widget class="QWidget" name="decisionTreePage">
+     <widget class="QLabel" name="decisionTreeCriterionLbl">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>60</y>
+        <width>60</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Criterion:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="decisionTreeCriterionComboBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>60</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Gini</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Entropy</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="decisionTreeMaxDepthLbl">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>110</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max Depth:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="decisionTreeMaxDepthSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>110</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="minSamplesSplitLbl">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>160</y>
+        <width>121</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Min Samples Split:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="minSamplesSplitSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>160</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QComboBox" name="algoComboBox">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>40</y>
+      <width>231</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Select...</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Decision Tree</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Algorithm:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="inputGrpBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>40</y>
+     <width>1051</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Input Data</string>
+   </property>
+   <widget class="QLabel" name="inputBandsLbl">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>40</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Input Bands for Classification:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="inputBandsPathTxt">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>40</y>
+      <width>531</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>  Select Bands To Be Used For Classification</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inputBandsBtn">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>40</y>
+      <width>41</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="inputShpLbl">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>100</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Shapefile:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inputShpBtn">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>100</y>
+      <width>41</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="inputShpTxt">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>100</y>
+      <width>531</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>  Input Training Samples Shapefile</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="inputClassAttrLbl">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>160</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Choose the class attribute:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="outputPathLbl">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>340</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Output Path:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="outputPathBtn">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>340</y>
+      <width>41</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="outputPathTxt">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>340</y>
+      <width>531</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>  Select Output Path</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="selectClassAttrList">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>161</y>
+      <width>531</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="accuracyGrpBox">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>450</y>
+     <width>531</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Accuracy Assessment</string>
+   </property>
+   <widget class="QPlainTextEdit" name="accuracyTxt">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>511</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="runClassificationBtn">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>779</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Run Classification</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBarSupervised">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>780</y>
+     <width>118</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
