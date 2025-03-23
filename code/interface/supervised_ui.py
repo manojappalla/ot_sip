@@ -1,10 +1,5 @@
 from PyQt5 import QtWidgets, uic
-from classification.supclass.band_stacker import BandStacker
-from classification.supclass.data_extractor import TrainingDataExtractor
-from classification.supclass.classifiers.decision_tree import (
-    DecisionTreeClassifierStrategy,
-)
-from classification.supclass.accuracy import AccuracyAssessor
+from satimgproc.classify import DataPreprocessor, DecisionTree, AccuracyAssessor
 import rasterio
 import geopandas as gpd
 import os
@@ -85,31 +80,23 @@ class SupervisedDialog(QtWidgets.QDialog):
         try:
             self.progressBarSupervised.setValue(0)
 
-            # Step 1: Stack bands
-            stacker = BandStacker(self.selected_band_files)
-            image_array = stacker.stack()
-            print(f"Image array shape: {image_array.shape}")
-            # Get metadata from one of the band files
-            with rasterio.open(self.selected_band_files[0]) as src:
-                meta = src.meta
+            # Step 1: Stack bands and extract training data
+            preprocessor = DataPreprocessor(
+                band_paths=self.selected_band_files,
+                shapefile_path=self.selected_shapefile,
+                class_attribute=self.selectClassAttrList.currentItem().text(),
+            )
+            image_array, meta = preprocessor.stack_bands()
 
             self.progressBarSupervised.setValue(30)
 
-            # Step 2: Extract training data
-            selected_item = self.selectClassAttrList.currentItem()
-            if selected_item:
-                class_attr = selected_item.text()
-            extractor = TrainingDataExtractor(
-                image_array, meta, self.selected_shapefile, class_attr
-            )
-            X_train, X_test, y_train, y_test = extractor.extract()
-
+            X_train, X_test, y_train, y_test = preprocessor.extract_training_data()
             self.progressBarSupervised.setValue(50)
 
             algorithm = self.algoComboBox.currentText()
 
             if algorithm == "Decision Tree":
-                # Step 3: Read Decision Tree parameters
+                # Step 2: Read parameters
                 criterion = (
                     self.decisionTreeCriterionComboBox.currentText().lower() or "gini"
                 )
@@ -119,31 +106,35 @@ class SupervisedDialog(QtWidgets.QDialog):
                 min_samples_split = self.minSamplesSplitSpinBox.value()
                 if min_samples_split < 2:
                     min_samples_split = 2
-                # Step 4: Train Decision Tree
-                classifier = DecisionTreeClassifierStrategy(
+
+                # Step 3: Train classifier
+                classifier = DecisionTree(
                     criterion=criterion,
                     max_depth=max_depth,
                     min_samples_split=min_samples_split,
                 )
                 classifier.train(X_train, y_train)
                 y_pred = classifier.predict(X_test)
+
             self.progressBarSupervised.setValue(80)
 
-            # Step 5: Accuracy assessment
+            # Step 4: Accuracy assessment
             assessor = AccuracyAssessor(y_test, y_pred)
             results = assessor.report()
 
-            # Step 6: Show results
-            report_lines = []
-            report_lines.append(f"Overall Accuracy: {results['overall_accuracy']:.3f}")
-            report_lines.append(f"Kappa Coefficient: {results['kappa']:.3f}")
-            report_lines.append("")
+            # Step 5: Show results
+            report_lines = [
+                f"Overall Accuracy: {results['overall_accuracy']:.3f}",
+                f"Kappa Coefficient: {results['kappa']:.3f}",
+                "",
+            ]
             for i, (pa, ua) in enumerate(
                 zip(results["producer_accuracy"], results["user_accuracy"])
             ):
                 report_lines.append(
-                    f"Class {i}: Producer Accuracy = {pa:.2f}, User Accuracy = {ua:.2f}"
+                    f"Class {i+1}: Producer Accuracy = {pa:.2f}, User Accuracy = {ua:.2f}"
                 )
+
             print("\n".join(report_lines))
             self.accuracyTxt.setPlainText("\n".join(report_lines))
 
@@ -165,9 +156,10 @@ class SupervisedDialog(QtWidgets.QDialog):
                 }
             )
             with rasterio.open(output_path, "w", **meta) as dst:
-                dst.write(classified_image, 1)
+                dst.write(classified_image.astype("uint8"), 1)
 
             self.progressBarSupervised.setValue(100)
+
         except Exception as e:
             exc_type, exc_obj, tb = sys.exc_info()
             fname = tb.tb_frame.f_code.co_filename

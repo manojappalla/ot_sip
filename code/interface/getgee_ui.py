@@ -5,7 +5,7 @@ import io
 import subprocess
 import platform
 from PyQt5.QtCore import QThread, pyqtSignal
-from gee_downloader.main import main
+from satimgproc.getgee import DownloaderManager
 
 
 # Worker thread for Earth Engine authentication
@@ -77,7 +77,7 @@ class DownloadWindow(QtWidgets.QMainWindow):
         super().__init__()
 
         # Load UI dynamically
-        uic.loadUi("ui/gee.ui", self)
+        uic.loadUi("ui/getgee.ui", self)
 
         # Set up signals
         self.setupSignals()
@@ -94,20 +94,24 @@ class DownloadWindow(QtWidgets.QMainWindow):
     def downloadData(self):
         """Initiate the download process based on the selected satellite."""
         if self.landsatRBtn.isChecked():
-            main(
+            self.downloadProgressBar.setValue(0)
+            download = DownloaderManager(
                 dataset="landsat",
-                geojson=self.geoJsonPath.text(),
+                geojson_path=self.geoJsonPath.text(),
                 start_date=self.startDateSelector.date().toString("yyyy-MM-dd"),
                 end_date=self.endDateSelector.date().toString("yyyy-MM-dd"),
             )
         elif self.sent2RBtn.isChecked():
-            main(
+            self.downloadProgressBar.setValue(0)
+            download = DownloaderManager(
                 dataset="sentinel",
-                geojson=self.geoJsonPath.text(),
+                geojson_path=self.geoJsonPath.text(),
                 start_date=self.startDateSelector.date().toString("yyyy-MM-dd"),
                 end_date=self.endDateSelector.date().toString("yyyy-MM-dd"),
                 cloud_cover=int(self.cloudCoverTxt.text()),
             )
+        download.run()
+        self.downloadProgressBar.setValue(100)
 
     def selectGeoJson(self):
         """Open a file dialog to select a GeoJSON file."""

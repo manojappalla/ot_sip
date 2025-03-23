@@ -20,11 +20,10 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
-from symbology.symbology_dialog_discrete import SymbologyDialogDiscrete
-from symbology.symbology_dialog_continuous import SymbologyDialogContinuous
-from rs_indices import IndicesWindow
-from download import DownloadWindow
-from supervised import SupervisedDialog
+from satimgproc.symbology import SymbologyDialogDiscrete, SymbologyDialogContinuous
+from indices_ui import IndicesWindow
+from getgee_ui import DownloadWindow
+from supervised_ui import SupervisedDialog
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -43,7 +42,7 @@ class HoverGraphicsView(QGraphicsView):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/sat_img_process.ui", self)
+        uic.loadUi("ui/main.ui", self)
 
         self.scene = QGraphicsScene()
         self.layer_items = {}

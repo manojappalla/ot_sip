@@ -1,8 +1,10 @@
 from PyQt5 import QtWidgets, uic
-from indices_app.indices.vegetation import VegetationIndices
-from indices_app.indices.water import WaterIndices
-from indices_app.indices.geology import GeologyIndices
-from indices_app.indices.land import LandIndices
+from satimgproc.indices import (
+    VegetationIndices,
+    WaterIndices,
+    GeologyIndices,
+    LandIndices,
+)
 
 
 class IndicesWindow(QtWidgets.QDialog):
