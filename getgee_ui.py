@@ -77,7 +77,7 @@ class DownloadWindow(QtWidgets.QMainWindow):
         super().__init__()
 
         # Load UI dynamically
-        uic.loadUi("ui/gee.ui", self)
+        uic.loadUi("ui/getgee.ui", self)
 
         # Set up signals
         self.setupSignals()
