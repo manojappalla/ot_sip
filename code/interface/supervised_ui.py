@@ -91,7 +91,6 @@ class SupervisedDialog(QtWidgets.QDialog):
             self.progressBarSupervised.setValue(30)
 
             X_train, X_test, y_train, y_test = preprocessor.extract_training_data()
-
             self.progressBarSupervised.setValue(50)
 
             algorithm = self.algoComboBox.currentText()
@@ -133,7 +132,7 @@ class SupervisedDialog(QtWidgets.QDialog):
                 zip(results["producer_accuracy"], results["user_accuracy"])
             ):
                 report_lines.append(
-                    f"Class {i}: Producer Accuracy = {pa:.2f}, User Accuracy = {ua:.2f}"
+                    f"Class {i+1}: Producer Accuracy = {pa:.2f}, User Accuracy = {ua:.2f}"
                 )
 
             print("\n".join(report_lines))
