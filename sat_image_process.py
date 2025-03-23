@@ -20,8 +20,9 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
-from symbology.symbology_dialog_discrete import SymbologyDialogDiscrete
-from symbology.symbology_dialog_continuous import SymbologyDialogContinuous
+# from symbology.symbology_dialog_discrete import SymbologyDialogDiscrete
+# from symbology.symbology_dialog_continuous import SymbologyDialogContinuous
+from satimgproc.symbology import SymbologyDialogDiscrete, SymbologyDialogContinuous
 from rs_indices import IndicesWindow
 from download import DownloadWindow
 from supervised import SupervisedDialog

@@ -1,6 +1,7 @@
 import rasterio
 
 
+# Used by indices.py
 def load_bands(band_paths):
     """Loads raster bands from files."""
     bands = {}
