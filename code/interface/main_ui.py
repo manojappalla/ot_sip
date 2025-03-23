@@ -24,6 +24,7 @@ from satimgproc.symbology import SymbologyDialogDiscrete, SymbologyDialogContinu
 from indices_ui import IndicesWindow
 from getgee_ui import DownloadWindow
 from supervised_ui import SupervisedDialog
+from unsupervised_ui import UnsupervisedDialog
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -70,11 +71,17 @@ class MainWindow(QMainWindow):
         self.actionDownload.triggered.connect(self.openDownload)
         self.actionIndices.triggered.connect(self.openIndices)
         self.actionSupervised.triggered.connect(self.openSupervised)
+        self.actionUnsupervised.triggered.connect(self.openUnsupervised)
 
     def openSupervised(self):
         # Create an instance of the SymbologyDialogDiscrete and show it
         self.supervised_dialog = SupervisedDialog()
         self.supervised_dialog.exec_()  # Using exec_() for modal dialog
+
+    def openUnsupervised(self):
+        # Create an instance of the SymbologyDialogDiscrete and show it
+        self.unsupervised_dialog = UnsupervisedDialog()
+        self.unsupervised_dialog.exec_()  # Using exec_() for modal dialog
 
     def openDownload(self):
         # Create an instance of the DownloadWindow and show it
