@@ -50,7 +50,7 @@ class UnsupervisedDialog(QtWidgets.QDialog):
         # Reset progress bar
         self.progressBar.setValue(0)
         # Show corresponding page in stacked widget
-        if text == "Decision Tree":
+        if text == "K-Means":
             self.algoStkUnsupervised.setCurrentWidget(self.kmeansPage)
         # Add other algorithms if needed
         # elif text == "Random Forest":
@@ -83,7 +83,12 @@ class UnsupervisedDialog(QtWidgets.QDialog):
             algorithm_name = self.algoUnsupervisedComboBox.currentText()
 
             if algorithm_name == "K-Means":
-                model = CustomKMeans(n_clusters=n_classes, random_state=42)
+                kmeans_kwargs = {
+                    "init": self.kMeansInitMethodComboBox.currentText(),
+                    "max_iter": self.kMeansMaxIterarationsSpinBox.value(),
+                    "random_state": 42,
+                }
+                model = CustomKMeans(n_clusters=n_classes, **kmeans_kwargs)
             else:
                 QtWidgets.QMessageBox.critical(
                     self, "Error", f"Unsupported algorithm: {algorithm_name}"
