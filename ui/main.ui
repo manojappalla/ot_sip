@@ -132,6 +132,7 @@
     <addaction name="actionDownload"/>
     <addaction name="actionIndices"/>
     <addaction name="menuClassification"/>
+    <addaction name="actionPhenotrack"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuRaster"/>
@@ -164,6 +165,11 @@
   <action name="actionUnsupervised">
    <property name="text">
     <string>Unsupervised</string>
+   </property>
+  </action>
+  <action name="actionPhenotrack">
+   <property name="text">
+    <string>Phenotrack</string>
    </property>
   </action>
  </widget>
