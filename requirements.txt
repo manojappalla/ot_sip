@@ -9,3 +9,4 @@ dask
 sentinelhub
 geopandas
 geemap
+scikit-learn

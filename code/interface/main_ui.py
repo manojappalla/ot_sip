@@ -20,10 +20,11 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
-from symbology.symbology_dialog_discrete import SymbologyDialogDiscrete
-from symbology.symbology_dialog_continuous import SymbologyDialogContinuous
-from rs_indices import IndicesWindow
-from download import DownloadWindow
+from satimgproc.symbology import SymbologyDialogDiscrete, SymbologyDialogContinuous
+from indices_ui import IndicesWindow
+from getgee_ui import DownloadWindow
+from supervised_ui import SupervisedDialog
+from unsupervised_ui import UnsupervisedDialog
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -42,7 +43,7 @@ class HoverGraphicsView(QGraphicsView):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/sat_img_process.ui", self)
+        uic.loadUi("ui/main.ui", self)
 
         self.scene = QGraphicsScene()
         self.layer_items = {}
@@ -69,6 +70,18 @@ class MainWindow(QMainWindow):
         self.layerTree.itemChanged.connect(self.handle_layer_visibility)
         self.actionDownload.triggered.connect(self.openDownload)
         self.actionIndices.triggered.connect(self.openIndices)
+        self.actionSupervised.triggered.connect(self.openSupervised)
+        self.actionUnsupervised.triggered.connect(self.openUnsupervised)
+
+    def openSupervised(self):
+        # Create an instance of the SymbologyDialogDiscrete and show it
+        self.supervised_dialog = SupervisedDialog()
+        self.supervised_dialog.exec_()  # Using exec_() for modal dialog
+
+    def openUnsupervised(self):
+        # Create an instance of the SymbologyDialogDiscrete and show it
+        self.unsupervised_dialog = UnsupervisedDialog()
+        self.unsupervised_dialog.exec_()  # Using exec_() for modal dialog
 
     def openDownload(self):
         # Create an instance of the DownloadWindow and show it
