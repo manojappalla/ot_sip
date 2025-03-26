@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Vegtrack</string>
   </property>
   <widget class="QGroupBox" name="sentinelHubAuthenticateGrpBox">
    <property name="geometry">
@@ -177,7 +177,7 @@
      <string>...</string>
     </property>
    </widget>
-   <widget class="QLabel" name="startDatePhenoLbl">
+   <widget class="QLabel" name="startDateVegLbl">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -190,7 +190,7 @@
      <string>Start Date:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="endDatePhenoLbl">
+   <widget class="QLabel" name="endDateVegLbl">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -203,7 +203,7 @@
      <string>End Date:</string>
     </property>
    </widget>
-   <widget class="QDateEdit" name="startDateSelectPheno">
+   <widget class="QDateEdit" name="startDateSelectVeg">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -213,7 +213,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QDateEdit" name="endDateSelectPheno">
+   <widget class="QDateEdit" name="endDateSelectVeg">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -223,7 +223,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="generatePhenoCurveBtn">
+   <widget class="QPushButton" name="generateVegCurveBtn">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -237,7 +237,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="phenotrackOutputGrpBox">
+  <widget class="QGroupBox" name="vegtrackOutputGrpBox">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -247,9 +247,9 @@
     </rect>
    </property>
    <property name="title">
-    <string>Phenology Curve</string>
+    <string>NDVI Time Series Curve</string>
    </property>
-   <widget class="QWebEngineView" name="webViewPheno" native="true">
+   <widget class="QWebEngineView" name="webViewVeg" native="true">
     <property name="geometry">
      <rect>
       <x>10</x>

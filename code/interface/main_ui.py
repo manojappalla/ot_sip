@@ -30,7 +30,7 @@ from indices_ui import IndicesWindow
 from getgee_ui import DownloadWindow
 from supervised_ui import SupervisedDialog
 from unsupervised_ui import UnsupervisedDialog
-from phenotrack_ui import PhenotrackDialog
+from vegtrack_ui import VegtrackDialog
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -78,12 +78,12 @@ class MainWindow(QMainWindow):
         self.actionIndices.triggered.connect(self.openIndices)
         self.actionSupervised.triggered.connect(self.openSupervised)
         self.actionUnsupervised.triggered.connect(self.openUnsupervised)
-        self.actionPhenotrack.triggered.connect(self.openPhenotrack)
+        self.actionPhenotrack.triggered.connect(self.openVegtrack)
 
-    def openPhenotrack(self):
+    def openVegtrack(self):
         # Create an instance of the PhenotrackDialog and show it
-        self.phenotrack_dialog = PhenotrackDialog()
-        self.phenotrack_dialog.exec_()  # Using exec_() for modal dialog
+        self.vegtrack_dialog = VegtrackDialog()
+        self.vegtrack_dialog.exec_()  # Using exec_() for modal dialog
 
     def openSupervised(self):
         # Create an instance of the SymbologyDialogDiscrete and show it

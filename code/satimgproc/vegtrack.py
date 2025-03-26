@@ -12,9 +12,10 @@ from sentinelhub import (
     bbox_to_dimensions,
 )
 from satimgproc.utils import authenticateSentinelHub, load_aoi_geometry
+from dask import delayed, compute
 
 
-class Phenotrack:
+class Vegtrack:
     def __init__(self, config, shapefile_path, start_date, end_date):
         self.shapefile_path = shapefile_path
         self.start_date = start_date
@@ -57,30 +58,37 @@ class Phenotrack:
 
     def compute_ndvi_series(self):
         tiles = self.fetch_tiles()
+        tasks = []
         for tile in tiles:
             date = tile["properties"]["datetime"][:10]
-            request = SentinelHubRequest(
-                evalscript=self.evalscript,
-                input_data=[
-                    SentinelHubRequest.input_data(
-                        data_collection=self.data_collection,
-                        time_interval=(date, date),
-                        mosaicking_order="leastCC",
-                    )
-                ],
-                responses=[
-                    SentinelHubRequest.output_response("default", MimeType.TIFF)
-                ],
-                geometry=self.aoi,
-                size=self.size,
-                config=self.config,
-            )
+            task = delayed(self._process_tile)(date)
+            tasks.append(task)
+        results = compute(*tasks)
+
+    def _process_tile(self, date):
+        request = SentinelHubRequest(
+            evalscript=self.evalscript,
+            input_data=[
+                SentinelHubRequest.input_data(
+                    data_collection=self.data_collection,
+                    time_interval=(date, date),
+                    mosaicking_order="leastCC",
+                )
+            ],
+            responses=[SentinelHubRequest.output_response("default", MimeType.TIFF)],
+            geometry=self.aoi,
+            size=self.size,
+            config=self.config,
+        )
+        try:
             response = request.get_data()[0]
             ndvi_data = response[:, :, 0]
             mask = response[:, :, 1]
             valid_ndvi = ndvi_data[mask > 0]
             if valid_ndvi.size > 0:
                 self.ndvi_dict[date] = float(np.nanmean(valid_ndvi))
+        except Exception as e:
+            print(f"Error processing {date}: {e}")
 
     def plot_ndvi(self):
         self.compute_ndvi_series()

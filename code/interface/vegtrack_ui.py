@@ -1,16 +1,16 @@
 import requests
 from PyQt5 import QtWidgets, uic
-from satimgproc.phenotrack import Phenotrack
+from satimgproc.vegtrack import Vegtrack
 from satimgproc.utils import authenticateSentinelHub
 
 
-class PhenotrackDialog(QtWidgets.QDialog):
+class VegtrackDialog(QtWidgets.QDialog):
 
     def __init__(self):
         super().__init__()
 
         # Load UI dynamically
-        uic.loadUi("ui/phenotrack.ui", self)
+        uic.loadUi("ui/vegtrack.ui", self)
         self.config = None
         # Set up signals
         self.setupSignals()
@@ -18,7 +18,7 @@ class PhenotrackDialog(QtWidgets.QDialog):
     def setupSignals(self):
         self.sentinelhubAuthBtn.clicked.connect(self.authenticate)
         self.inputShpPathBtn.clicked.connect(self.selectShapefile)
-        self.generatePhenoCurveBtn.clicked.connect(self.generatePhenocurve)
+        self.generateVegCurveBtn.clicked.connect(self.generateVegcurve)
 
     def authenticate(self):
         config_args = {
@@ -57,12 +57,12 @@ class PhenotrackDialog(QtWidgets.QDialog):
                 fileName
             )  # Update the text box with the selected file path
 
-    def generatePhenocurve(self):
-        phenotrack = Phenotrack(
+    def generateVegcurve(self):
+        vegtrack = Vegtrack(
             self.config,
             self.inputShpPathTxt.text(),
-            self.startDateSelectPheno.date().toString("yyyy-MM-dd"),
-            self.endDateSelectPheno.date().toString("yyyy-MM-dd"),
+            self.startDateSelectVeg.date().toString("yyyy-MM-dd"),
+            self.endDateSelectVeg.date().toString("yyyy-MM-dd"),
         )
-        html = phenotrack.plot_ndvi()
-        self.webViewPheno.setHtml(html)
+        html = vegtrack.plot_ndvi()
+        self.webViewVeg.setHtml(html)
