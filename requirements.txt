@@ -10,3 +10,5 @@ sentinelhub
 geopandas
 geemap
 scikit-learn
+PyQtWebEngine
+plotly
