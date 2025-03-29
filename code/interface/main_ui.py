@@ -31,6 +31,7 @@ from getgee_ui import DownloadWindow
 from supervised_ui import SupervisedDialog
 from unsupervised_ui import UnsupervisedDialog
 from vegtrack_ui import VegtrackDialog
+from edgedet_ui import EdgedetDialog
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -79,6 +80,12 @@ class MainWindow(QMainWindow):
         self.actionSupervised.triggered.connect(self.openSupervised)
         self.actionUnsupervised.triggered.connect(self.openUnsupervised)
         self.actionPhenotrack.triggered.connect(self.openVegtrack)
+        self.actionEdge_Detection.triggered.connect(self.openEdgeDetection)
+
+    def openEdgeDetection(self):
+        # # Create an instance of the SymbologyDialogDiscrete and show it
+        self.edge_dialog = EdgedetDialog()
+        self.edge_dialog.exec_()  # Using exec_() for modal dialog
 
     def openVegtrack(self):
         # Create an instance of the PhenotrackDialog and show it

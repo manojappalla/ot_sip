@@ -129,10 +129,18 @@
      <addaction name="actionSupervised"/>
      <addaction name="actionUnsupervised"/>
     </widget>
+    <widget class="QMenu" name="menuDetection">
+     <property name="title">
+      <string>Detection</string>
+     </property>
+     <addaction name="actionEdge_Detection"/>
+    </widget>
     <addaction name="actionDownload"/>
     <addaction name="actionIndices"/>
     <addaction name="menuClassification"/>
     <addaction name="actionPhenotrack"/>
+    <addaction name="menuDetection"/>
+    <addaction name="actionMorphIt"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuRaster"/>
@@ -169,7 +177,17 @@
   </action>
   <action name="actionPhenotrack">
    <property name="text">
-    <string>Phenotrack</string>
+    <string>Vegtrack</string>
+   </property>
+  </action>
+  <action name="actionEdge_Detection">
+   <property name="text">
+    <string>Edge Detection</string>
+   </property>
+  </action>
+  <action name="actionMorphIt">
+   <property name="text">
+    <string>MorphIt</string>
    </property>
   </action>
  </widget>
