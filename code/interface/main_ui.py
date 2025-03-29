@@ -32,6 +32,7 @@ from supervised_ui import SupervisedDialog
 from unsupervised_ui import UnsupervisedDialog
 from vegtrack_ui import VegtrackDialog
 from edgedet_ui import EdgedetDialog
+from morphit_ui import MorphitDialog
 
 
 class HoverGraphicsView(QGraphicsView):
@@ -81,6 +82,12 @@ class MainWindow(QMainWindow):
         self.actionUnsupervised.triggered.connect(self.openUnsupervised)
         self.actionPhenotrack.triggered.connect(self.openVegtrack)
         self.actionEdge_Detection.triggered.connect(self.openEdgeDetection)
+        self.actionMorphIt.triggered.connect(self.openMorphit)
+
+    def openMorphit(self):
+        # # Create an instance of the SymbologyDialogDiscrete and show it
+        self.morphit_dialog = MorphitDialog()
+        self.morphit_dialog.exec_()  # Using exec_() for modal dialog
 
     def openEdgeDetection(self):
         # # Create an instance of the SymbologyDialogDiscrete and show it
