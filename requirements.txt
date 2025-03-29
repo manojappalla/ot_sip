@@ -12,3 +12,5 @@ geemap
 scikit-learn
 PyQtWebEngine
 plotly
+scikit-image
+opencv-python-headless
