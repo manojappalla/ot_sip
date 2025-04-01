@@ -1,3 +1,4 @@
+from typing import List, Tuple, Dict, Optional
 from PyQt5.QtWidgets import (
     QDialog,
     QVBoxLayout,
@@ -20,7 +21,19 @@ import numpy as np
 # Symbology Dialog for Continuous Data
 # ------------------------------------------
 class SymbologyDialogContinuous(QDialog):
-    def __init__(self, min_val, max_val, num_classes=4):
+    """
+    Dialog for defining class breaks and selecting colors for continuous raster data.
+    """
+
+    def __init__(self, min_val: float, max_val: float, num_classes: int = 4):
+        """
+        Initializes the continuous symbology dialog.
+
+        Parameters:
+        - min_val (float): Minimum value of the raster.
+        - max_val (float): Maximum value of the raster.
+        - num_classes (int): Initial number of classes to display.
+        """
         super().__init__()
         self.setWindowTitle("Symbology - Continuous Data")
         self.resize(400, 300)
@@ -59,7 +72,13 @@ class SymbologyDialogContinuous(QDialog):
         self.setLayout(layout)
         self.build_table(num_classes)
 
-    def build_table(self, n):
+    def build_table(self, n: int) -> None:
+        """
+        Builds the table rows with equally spaced ranges and default colors.
+
+        Parameters:
+        - n (int): Number of class intervals.
+        """
         self.table.setRowCount(n)
         self.ranges = []
         self.color_map = []
@@ -80,14 +99,26 @@ class SymbologyDialogContinuous(QDialog):
             color_btn.clicked.connect(lambda _, row=i: self.pick_color(row))
             self.table.setCellWidget(i, 2, color_btn)
 
-    def pick_color(self, row):
+    def pick_color(self, row: int) -> None:
+        """
+        Opens a color picker to change the color for a specific range.
+
+        Parameters:
+        - row (int): Table row to update the color for.
+        """
         color = QColorDialog.getColor()
         if color.isValid():
             self.color_map[row] = color
             btn = self.table.cellWidget(row, 2)
             btn.setStyleSheet(f"background-color: {color.name()}")
 
-    def get_ranges_and_colors(self):
+    def get_ranges_and_colors(self) -> Tuple[List[Tuple[float, float]], List[QColor]]:
+        """
+        Returns the selected value ranges and their corresponding colors.
+
+        Returns:
+        - tuple: (list of (from, to) tuples, list of QColor objects)
+        """
         return self.ranges, self.color_map
 
 
@@ -95,7 +126,22 @@ class SymbologyDialogContinuous(QDialog):
 # Symbology Dialog for Discrete (Classified) Data
 # ------------------------------------------
 class SymbologyDialogDiscrete(QDialog):
-    def __init__(self, class_values, current_colors=None):
+    """
+    Dialog for selecting colors for classified (discrete) raster values.
+    """
+
+    def __init__(
+        self,
+        class_values: List[int],
+        current_colors: Optional[Dict[int, QColor]] = None,
+    ):
+        """
+        Initializes the discrete symbology dialog.
+
+        Parameters:
+        - class_values (list): List of unique class values.
+        - current_colors (dict, optional): Mapping of class value to QColor.
+        """
         super().__init__()
         self.setWindowTitle("Symbology - Classified Data")
         self.resize(400, 300)
@@ -133,11 +179,24 @@ class SymbologyDialogDiscrete(QDialog):
         layout.addWidget(apply_btn)
         self.setLayout(layout)
 
-    def pick_color(self, class_val, button):
+    def pick_color(self, class_val: int, button: QPushButton) -> None:
+        """
+        Opens a color picker for a specific class and updates the color.
+
+        Parameters:
+        - class_val (int or str): The class value to change color for.
+        - button (QPushButton): The button to update with the new color.
+        """
         color = QColorDialog.getColor()
         if color.isValid():
             self.color_map[class_val] = color
             button.setStyleSheet(f"background-color: {color.name()}")
 
-    def get_color_map(self):
+    def get_color_map(self) -> Dict[int, QColor]:
+        """
+        Returns the final color mapping after user selection.
+
+        Returns:
+        - dict: Mapping of class values to QColor.
+        """
         return self.color_map

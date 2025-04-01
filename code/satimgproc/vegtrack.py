@@ -1,3 +1,4 @@
+from typing import Dict, List, Optional
 import numpy as np
 from datetime import datetime
 import geopandas as gpd
@@ -16,7 +17,29 @@ from dask import delayed, compute
 
 
 class Vegtrack:
-    def __init__(self, config, shapefile_path, start_date, end_date):
+    """
+    A class for tracking vegetation (NDVI) trends over time using Sentinel Hub.
+
+    This class fetches Sentinel-2 tiles, computes NDVI using an evalscript,
+    and plots the NDVI time series for a given AOI defined in a shapefile.
+    """
+
+    def __init__(
+        self,
+        config: SHConfig,
+        shapefile_path: str,
+        start_date: str,
+        end_date: str,
+    ):
+        """
+        Initializes the Vegtrack object.
+
+        Parameters:
+        - config (SHConfig): Sentinel Hub authentication/configuration object.
+        - shapefile_path (str): Path to the AOI shapefile.
+        - start_date (str): Start date in 'YYYY-MM-DD' format.
+        - end_date (str): End date in 'YYYY-MM-DD' format.
+        """
         self.shapefile_path = shapefile_path
         self.start_date = start_date
         self.end_date = end_date
@@ -31,7 +54,13 @@ class Vegtrack:
         self.evalscript = self._ndvi_evalscript()
         self.ndvi_dict = {}
 
-    def _ndvi_evalscript(self):
+    def _ndvi_evalscript(self) -> str:
+        """
+        Returns the JavaScript Evalscript for NDVI computation.
+
+        Returns:
+        - str: Evalscript for Sentinel Hub request.
+        """
         return """
         //VERSION=3
         function setup() {
@@ -46,7 +75,13 @@ class Vegtrack:
         }
         """
 
-    def fetch_tiles(self):
+    def fetch_tiles(self) -> List[dict]:
+        """
+        Searches Sentinel Hub catalog for tiles matching the AOI and time range.
+
+        Returns:
+        - list: List of tile metadata dictionaries.
+        """
         catalog = SentinelHubCatalog(config=self.config)
         search_iterator = catalog.search(
             collection=self.data_collection,
@@ -56,7 +91,12 @@ class Vegtrack:
         )
         return list(search_iterator)
 
-    def compute_ndvi_series(self):
+    def compute_ndvi_series(self) -> None:
+        """
+        Computes the NDVI time series by processing all fetched tiles.
+
+        This method populates `self.ndvi_dict` with date:mean_ndvi pairs.
+        """
         tiles = self.fetch_tiles()
         tasks = []
         for tile in tiles:
@@ -65,7 +105,13 @@ class Vegtrack:
             tasks.append(task)
         results = compute(*tasks)
 
-    def _process_tile(self, date):
+    def _process_tile(self, date: str) -> None:
+        """
+        Processes a single tile to compute mean NDVI for a given date.
+
+        Parameters:
+        - date (str): Date in 'YYYY-MM-DD' format.
+        """
         request = SentinelHubRequest(
             evalscript=self.evalscript,
             input_data=[
@@ -90,7 +136,13 @@ class Vegtrack:
         except Exception as e:
             print(f"Error processing {date}: {e}")
 
-    def plot_ndvi(self):
+    def plot_ndvi(self) -> Optional[str]:
+        """
+        Plots the NDVI time series as an interactive Plotly graph.
+
+        Returns:
+        - str: HTML string containing the Plotly chart.
+        """
         self.compute_ndvi_series()
         if not self.ndvi_dict:
             print("No NDVI data to plot. Run compute_ndvi_series() first.")
